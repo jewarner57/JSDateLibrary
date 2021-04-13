@@ -9,6 +9,16 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "eslintConfig": {
+    "extends": "airbnb-base",
+    "rules": {
+      "no-console": 0,
+      "no-unused-vars": 1,
+      "semi": 0,
+      "no-underscore-dangle": 0,
+      "class-methods-use-this": 0
+    }
+  },
   "author": "Jonathan Warner",
   "license": "ISC",
   "dependencies": {
