@@ -105,7 +105,57 @@ class ED {
 
     return convertedMask
   }
+
+  when(date) {
+    const now = new Date()
+    // Get the difference between the two dates in minutes
+    const dateDifference = (date - now) / 60000
+    // Decide whether it's in the past or future
+    let suffix = dateDifference > 0 ? 'from now' : 'ago'
+
+    // Get the number of hours, days, months, and years
+    const years = Math.abs(Math.round(dateDifference / 525600))
+    const months = Math.abs(Math.round((dateDifference / 43200) % 12))
+    const days = Math.abs(Math.round((dateDifference / 1440) % 30))
+    const hours = Math.abs(Math.round((dateDifference / 60) % 24))
+    const minutes = dateDifference % 60
+
+    let dateDiffString = `${Math.round(Math.abs(minutes))} minutes`
+
+    if (minutes > 0 && minutes < 1) {
+      dateDiffString = 'Less than one minute'
+    }
+    if ((minutes < 0 && minutes > -1)) {
+      dateDiffString = 'Less than a minute'
+    }
+    if (minutes === 0) {
+      dateDiffString = 'Now'
+      suffix = ''
+    }
+
+    if (hours > 0) {
+      dateDiffString = `${hours} hours, ${dateDiffString}`
+    }
+
+    if (days > 0) {
+      dateDiffString = `${days} days, ${dateDiffString}`
+    }
+
+    if (months > 0) {
+      dateDiffString = `${months} months, ${dateDiffString}`
+    }
+
+    if (years > 0) {
+      dateDiffString = `${years} years, ${dateDiffString}`
+    }
+
+    return `${dateDiffString} ${suffix}`
+  }
 }
 
 const EasyDate = new ED('September 21, 1821, 4:3:39')
 console.log(EasyDate.format('%Y-%M-%a %H:%I:%S'))
+console.log(EasyDate.when(new Date('June 17, 2027, 4:24 PM')))
+console.log(EasyDate.when(new Date('August 9, 2009, 3:54 PM')))
+console.log(EasyDate.when(new Date('April 13, 2021, 5:06 PM')))
+console.log(EasyDate.when(new Date()))
