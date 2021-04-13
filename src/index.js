@@ -107,7 +107,7 @@ class ED {
   }
 
   when(date) {
-    const now = new Date()
+    const now = new Date(this.date)
     // Get the difference between the two dates in minutes
     const dateDifference = (date - now) / 60000
     // Decide whether it's in the past or future
@@ -153,9 +153,11 @@ class ED {
   }
 }
 
-const EasyDate = new ED('September 21, 1821, 4:3:39')
-console.log(EasyDate.format('%Y-%M-%a %H:%I:%S'))
+const EasyDate = new ED('April 21, 2021, 4:03:39')
+console.log(EasyDate.format('%M-%D-%Y %H:%I:%S'))
 console.log(EasyDate.when(new Date('June 17, 2027, 4:24 PM')))
 console.log(EasyDate.when(new Date('August 9, 2009, 3:54 PM')))
 console.log(EasyDate.when(new Date('April 13, 2021, 5:06 PM')))
+console.log(EasyDate.when(new Date('May 13, 2021, 5:06 PM')))
+console.log(EasyDate.when(new Date('April 5, 2021, 5:06 PM')))
 console.log(EasyDate.when(new Date()))
