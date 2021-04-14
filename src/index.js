@@ -73,10 +73,10 @@ class ED {
 
   /**
 * secs
-* @type {String}
+* @type {number}
 */
   get numMonth() {
-    return this.date.getMonth()
+    return this.date.getMonth() + 1
   }
 
   /**
@@ -214,11 +214,4 @@ class ED {
   }
 }
 
-const EasyDate = new ED('April 21, 2021, 4:03:39')
-console.log(EasyDate.format('%M-%D-%Y %H:%I:%S'))
-console.log(EasyDate.when(new Date('June 17, 2027, 4:24 PM')))
-console.log(EasyDate.when(new Date('August 9, 2009, 3:54 PM')))
-console.log(EasyDate.when(new Date('April 13, 2021, 5:06 PM')))
-console.log(EasyDate.when(new Date('May 13, 2021, 5:06 PM')))
-console.log(EasyDate.when(new Date('April 5, 2021, 5:06 PM')))
-console.log(EasyDate.when(new Date('April 21, 2021, 4:03:38 AM')))
+module.exports = { ED }

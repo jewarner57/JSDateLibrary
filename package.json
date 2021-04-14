@@ -1,14 +1,14 @@
 {
-  "name": "datelibrary",
+  "name": "@jewarner57/easydate",
   "version": "1.0.0",
-  "description": "An improved javascript date object",
+  "description": "A compact JS date library that won't make you cry.",
   "main": "index.js",
   "directories": {
     "test": "tests"
   },
   "scripts": {
     "start": "node ./src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --watchAll"
   },
   "eslintConfig": {
     "extends": "airbnb-base",
