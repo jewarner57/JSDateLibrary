@@ -162,7 +162,8 @@ class ED {
 
   /**
 * when
-* @param {String, number} input a singular unit name, and the amount of that unit
+* @param {String} input a singular unit name
+* @param {number} input the amount of that unit
 * @returns {String} a singular if 1 or plural if > 1 unit name
 */
   getUnitForm(unitName, unitAmount) {
@@ -170,6 +171,22 @@ class ED {
       return `${unitName}s`
     }
     return unitName
+  }
+
+  /**
+* when
+* @param {String} input a singular unit name
+* @param {number} input the divisor to achieve the desired unit from a number of seconds
+* @param {number} input the modulus number to achieve the desired unit from a number of seconds
+* @param {number} input the difference between two dates given in seconds
+* @returns {String} the unit amount string or an empty string if unit is less than 1
+*/
+  getUnitAmountFromDateDifference(name, divisor, modulus, dateDifference) {
+    const unit = Math.floor(Math.abs(dateDifference / divisor)) % modulus
+    if (unit > 0) {
+      return `${Math.round(Math.abs(unit))} ${this.getUnitForm(name, unit)}`
+    }
+    return null
   }
 
   /**
@@ -183,8 +200,7 @@ class ED {
     const dateDifference = (date - now) / 60000
     // Decide whether it's in the past or future
     let suffix = dateDifference > 0 ? ' from now' : ' ago'
-
-    const dateDiffArr = []
+    let dateDiffArr = []
 
     // Since date difference is in minutes
     // We can check if the total time difference is < 1 minute
@@ -199,30 +215,23 @@ class ED {
       suffix = ''
     }
 
-    const minutes = Math.abs(dateDifference) % 60
-    if (Math.floor(minutes) > 0) {
-      dateDiffArr.unshift(`${Math.round(Math.abs(minutes))} ${this.getUnitForm('minute', minutes)}`)
-    }
+    // Get minutes
+    dateDiffArr.unshift(this.getUnitAmountFromDateDifference('minute', 1, 60, dateDifference))
 
-    const hours = Math.floor(Math.abs((dateDifference / 60) % 24))
-    if (hours > 0) {
-      dateDiffArr.unshift(`${hours} ${this.getUnitForm('hour', hours)}`)
-    }
+    // Get hours
+    dateDiffArr.unshift(this.getUnitAmountFromDateDifference('hour', 60, 24, dateDifference))
 
-    const days = Math.floor(Math.abs((dateDifference / 1440) % 30))
-    if (days > 0) {
-      dateDiffArr.unshift(`${days} ${this.getUnitForm('day', days)}`)
-    }
+    // Get days
+    dateDiffArr.unshift(this.getUnitAmountFromDateDifference('day', 1440, 30, dateDifference))
 
-    const months = Math.floor(Math.abs((dateDifference / 43200) % 12))
-    if (months > 0) {
-      dateDiffArr.unshift(`${months} ${this.getUnitForm('month', months)}`)
-    }
+    // Get months
+    dateDiffArr.unshift(this.getUnitAmountFromDateDifference('month', 43200, 12, dateDifference))
 
-    const years = Math.floor(Math.abs(dateDifference / 525600))
-    if (years > 0) {
-      dateDiffArr.unshift(`${years} ${this.getUnitForm('year', years)}`)
-    }
+    // Get years
+    dateDiffArr.unshift(this.getUnitAmountFromDateDifference('year', 525600, 525600, dateDifference))
+
+    // Remove all null unit values
+    dateDiffArr = dateDiffArr.filter((elem) => elem != null)
 
     return `${dateDiffArr.join(', ')}${suffix}`
   }
