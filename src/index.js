@@ -39,62 +39,116 @@ class ED {
     }
   }
 
+  /**
+* secs
+* @type {String}
+*/
   get year() {
     return this.date.getFullYear()
   }
 
+  /**
+* secs
+* @type {number}
+*/
   get yr() {
     return this.date.getFullYear() % 100
   }
 
+  /**
+* secs
+* @type {String}
+*/
   get month() {
     return this.date.toLocaleString('en-us', { month: 'long' });
   }
 
+  /**
+* secs
+* @type {String}
+*/
   get mon() {
     return this.date.toLocaleString('en-us', { month: 'short' });
   }
 
+  /**
+* secs
+* @type {String}
+*/
   get numMonth() {
     return this.date.getMonth()
   }
 
+  /**
+* secs
+* @type {String}
+*/
   get day() {
     return this.date.toLocaleString('en-us', { weekday: 'long' });
   }
 
+  /**
+* secs
+* @type {String}
+*/
   get dy() {
     return this.date.toLocaleString('en-us', { weekday: 'short' });
   }
 
+  /**
+* secs
+* @type {number}
+*/
   get numDay() {
     return this.date.getDay()
   }
 
-  // Returns int
+  /**
+* secs
+* @type {number}
+*/
   get dom() {
     return this.date.getDate()
   }
 
-  // Returns int
+  /**
+* secs
+* @type {number}
+*/
   get hours() {
     return this.date.getHours()
   }
 
-  // Returns int
+  /**
+* secs
+* @type {number}
+*/
   get mins() {
     return this.date.getMinutes()
   }
 
-  // Returns int
+  /**
+ * secs
+ * @type {number}
+ */
   get secs() {
     return this.date.getSeconds()
   }
 
+  /**
+ * zeroPadNumber
+ * @param {number} input number
+ * @returns {String} a zero padded number
+ */
   zeroPadNumber(num) {
     return num > 9 ? String(num) : `0${num}`
   }
 
+  /**
+* format
+* @param {string} input a string mask
+* @returns {String} a mask where all formatting chars have been replaced
+*/
   format(mask) {
     let convertedMask = mask
 
@@ -106,6 +160,11 @@ class ED {
     return convertedMask
   }
 
+  /**
+* when
+* @param {Date} input a date
+* @returns {String} a human readable difference of time between the two dates
+*/
   when(date) {
     const now = new Date(this.date)
     // Get the difference between the two dates in minutes
@@ -122,13 +181,15 @@ class ED {
 
     let dateDiffString = `${Math.round(Math.abs(minutes))} minutes`
 
-    if (minutes > 0 && minutes < 1) {
+    // Since date difference is in minutes
+    // We can check if the total time difference is < 1 minute
+    if (dateDifference > 0 && dateDifference < 1) {
       dateDiffString = 'Less than one minute'
     }
-    if ((minutes < 0 && minutes > -1)) {
+    if ((dateDifference < 0 && dateDifference > -1)) {
       dateDiffString = 'Less than a minute'
     }
-    if (minutes === 0) {
+    if (dateDifference === 0) {
       dateDiffString = 'Now'
       suffix = ''
     }
@@ -160,4 +221,4 @@ console.log(EasyDate.when(new Date('August 9, 2009, 3:54 PM')))
 console.log(EasyDate.when(new Date('April 13, 2021, 5:06 PM')))
 console.log(EasyDate.when(new Date('May 13, 2021, 5:06 PM')))
 console.log(EasyDate.when(new Date('April 5, 2021, 5:06 PM')))
-console.log(EasyDate.when(new Date()))
+console.log(EasyDate.when(new Date('April 21, 2021, 4:03:38 AM')))
