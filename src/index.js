@@ -162,6 +162,18 @@ class ED {
 
   /**
 * when
+* @param {String, number} input a singular unit name, and the amount of that unit
+* @returns {String} a singular if 1 or plural if > 1 unit name
+*/
+  getUnitForm(unitName, unitAmount) {
+    if (unitAmount > 1) {
+      return `${unitName}s`
+    }
+    return unitName
+  }
+
+  /**
+* when
 * @param {Date} input a date
 * @returns {String} a human readable difference of time between the two dates
 */
@@ -171,13 +183,6 @@ class ED {
     const dateDifference = (date - now) / 60000
     // Decide whether it's in the past or future
     let suffix = dateDifference > 0 ? ' from now' : ' ago'
-
-    // Get the number of hours, days, months, and years
-    const years = Math.floor(Math.abs(dateDifference / 525600))
-    const months = Math.floor(Math.abs((dateDifference / 43200) % 12))
-    const days = Math.floor(Math.abs((dateDifference / 1440) % 30))
-    const hours = Math.floor(Math.abs((dateDifference / 60) % 24))
-    const minutes = Math.abs(dateDifference) % 60
 
     const dateDiffArr = []
 
@@ -194,40 +199,32 @@ class ED {
       suffix = ''
     }
 
+    const minutes = Math.abs(dateDifference) % 60
     if (Math.floor(minutes) > 0) {
       dateDiffArr.unshift(`${Math.round(Math.abs(minutes))} ${this.getUnitForm('minute', minutes)}`)
     }
 
+    const hours = Math.floor(Math.abs((dateDifference / 60) % 24))
     if (hours > 0) {
       dateDiffArr.unshift(`${hours} ${this.getUnitForm('hour', hours)}`)
     }
 
+    const days = Math.floor(Math.abs((dateDifference / 1440) % 30))
     if (days > 0) {
       dateDiffArr.unshift(`${days} ${this.getUnitForm('day', days)}`)
     }
 
+    const months = Math.floor(Math.abs((dateDifference / 43200) % 12))
     if (months > 0) {
       dateDiffArr.unshift(`${months} ${this.getUnitForm('month', months)}`)
     }
 
+    const years = Math.floor(Math.abs(dateDifference / 525600))
     if (years > 0) {
       dateDiffArr.unshift(`${years} ${this.getUnitForm('year', years)}`)
     }
 
     return `${dateDiffArr.join(', ')}${suffix}`
-  }
-
-
-  /**
-* when
-* @param {String, number} input a singular unit name, and the amount of that unit
-* @returns {String} a singular if 1 or plural if > 1 unit name
-*/
-  getUnitForm(unitName, unitAmount) {
-    if (unitAmount > 1) {
-      return `${unitName}s`
-    }
-    return unitName
   }
 }
 
