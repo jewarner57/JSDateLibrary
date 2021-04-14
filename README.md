@@ -4,14 +4,12 @@
 <br>
 
 ### How to get started?
-* You can [download EasyDate on npm]()
+* You can [download easydate on npm](https://www.npmjs.com/package/@jewarner57/easydate)
 
 <br>
 
 ### EasyDate Docs:
 * Below is a list of EasyDate's methods with examples and tips for using them.
-<br>
-
 
 ### format()
 * Create a date format string using our list of valid format codes and send it as an argument to the format method. It will return a formatted date.

@@ -40,7 +40,7 @@ class ED {
   }
 
   /**
-* secs
+* year
 * @type {String}
 */
   get year() {
@@ -48,7 +48,7 @@ class ED {
   }
 
   /**
-* secs
+* yr
 * @type {number}
 */
   get yr() {
@@ -56,7 +56,7 @@ class ED {
   }
 
   /**
-* secs
+* month
 * @type {String}
 */
   get month() {
@@ -64,7 +64,7 @@ class ED {
   }
 
   /**
-* secs
+* mon
 * @type {String}
 */
   get mon() {
@@ -72,7 +72,7 @@ class ED {
   }
 
   /**
-* secs
+* numMonth
 * @type {number}
 */
   get numMonth() {
@@ -80,7 +80,7 @@ class ED {
   }
 
   /**
-* secs
+* day
 * @type {String}
 */
   get day() {
@@ -88,7 +88,7 @@ class ED {
   }
 
   /**
-* secs
+* dy
 * @type {String}
 */
   get dy() {
@@ -96,7 +96,7 @@ class ED {
   }
 
   /**
-* secs
+* numDay
 * @type {number}
 */
   get numDay() {
@@ -104,7 +104,7 @@ class ED {
   }
 
   /**
-* secs
+* dom
 * @type {number}
 */
   get dom() {
@@ -112,7 +112,7 @@ class ED {
   }
 
   /**
-* secs
+* hours
 * @type {number}
 */
   get hours() {
@@ -120,7 +120,7 @@ class ED {
   }
 
   /**
-* secs
+* mins
 * @type {number}
 */
   get mins() {
@@ -170,47 +170,64 @@ class ED {
     // Get the difference between the two dates in minutes
     const dateDifference = (date - now) / 60000
     // Decide whether it's in the past or future
-    let suffix = dateDifference > 0 ? 'from now' : 'ago'
+    let suffix = dateDifference > 0 ? ' from now' : ' ago'
 
     // Get the number of hours, days, months, and years
-    const years = Math.abs(Math.round(dateDifference / 525600))
-    const months = Math.abs(Math.round((dateDifference / 43200) % 12))
-    const days = Math.abs(Math.round((dateDifference / 1440) % 30))
-    const hours = Math.abs(Math.round((dateDifference / 60) % 24))
-    const minutes = dateDifference % 60
+    const years = Math.floor(Math.abs(dateDifference / 525600))
+    const months = Math.floor(Math.abs((dateDifference / 43200) % 12))
+    const days = Math.floor(Math.abs((dateDifference / 1440) % 30))
+    const hours = Math.floor(Math.abs((dateDifference / 60) % 24))
+    const minutes = Math.abs(dateDifference) % 60
 
-    let dateDiffString = `${Math.round(Math.abs(minutes))} minutes`
+    const dateDiffArr = []
 
     // Since date difference is in minutes
     // We can check if the total time difference is < 1 minute
     if (dateDifference > 0 && dateDifference < 1) {
-      dateDiffString = 'Less than one minute'
+      dateDiffArr.unshift('Less than one minute')
     }
     if ((dateDifference < 0 && dateDifference > -1)) {
-      dateDiffString = 'Less than a minute'
+      dateDiffArr.unshift('Less than a minute')
     }
     if (dateDifference === 0) {
-      dateDiffString = 'Now'
+      dateDiffArr.unshift('Now')
       suffix = ''
     }
 
+    if (Math.floor(minutes) > 0) {
+      dateDiffArr.unshift(`${Math.round(Math.abs(minutes))} ${this.getUnitForm('minute', minutes)}`)
+    }
+
     if (hours > 0) {
-      dateDiffString = `${hours} hours, ${dateDiffString}`
+      dateDiffArr.unshift(`${hours} ${this.getUnitForm('hour', hours)}`)
     }
 
     if (days > 0) {
-      dateDiffString = `${days} days, ${dateDiffString}`
+      dateDiffArr.unshift(`${days} ${this.getUnitForm('day', days)}`)
     }
 
     if (months > 0) {
-      dateDiffString = `${months} months, ${dateDiffString}`
+      dateDiffArr.unshift(`${months} ${this.getUnitForm('month', months)}`)
     }
 
     if (years > 0) {
-      dateDiffString = `${years} years, ${dateDiffString}`
+      dateDiffArr.unshift(`${years} ${this.getUnitForm('year', years)}`)
     }
 
-    return `${dateDiffString} ${suffix}`
+    return `${dateDiffArr.join(', ')}${suffix}`
+  }
+
+
+  /**
+* when
+* @param {String, number} input a singular unit name, and the amount of that unit
+* @returns {String} a singular if 1 or plural if > 1 unit name
+*/
+  getUnitForm(unitName, unitAmount) {
+    if (unitAmount > 1) {
+      return `${unitName}s`
+    }
+    return unitName
   }
 }
 
