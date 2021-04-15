@@ -23,6 +23,10 @@
   },
   "author": "Jonathan Warner",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jewarner57/JSDateLibrary.git"
+  },
   "dependencies": {},
   "devDependencies": {
     "eslint": "^7.24.0",
