@@ -11,10 +11,22 @@
 ### EasyDate Docs:
 * Below is a list of EasyDate's methods with examples and tips for using them.
 
+### when()
+* Returns a human readable string of when a date will happen in relation to the current date.
+``` javascript
+const ED = new EasyDate('April 21, 2021')
+
+ED.when('May 20, 2021') -> "29 days from now"
+ED.when('April 17, 2021') -> "4 days ago"
+```
+
 ### format()
 * Create a date format string using our list of valid format codes and send it as an argument to the format method. It will return a formatted date.
 ``` javascript
-new EasyDate("March 21, 2021").format("%M-%D-%Y") -> "03-21-2021"
+const ED = new EasyDate('March 21, 2021, 4:03')
+
+ED.format("%M-%D-%Y") -> "03-21-2021"
+ED.format('%W, %B %d, %h:%I') -> 'Sunday, March 21, 4:03'
 ```
 
 ### Valid format codes and their meaning:
@@ -37,3 +49,30 @@ new EasyDate("March 21, 2021").format("%M-%D-%Y") -> "03-21-2021"
 |  %i  | Minute 5:07pm: (7)
 |  %S  | Zero padded seconds 5:07:08pm: (08)
 |  %s  | Seconds 5:07:08pm: (8)
+
+<br>
+
+### zeroPadNumber()
+* Takes a number the number as a string preceded with a 0 if it is less than 10.
+``` javascript
+new EasyDate().zeroPadNumber(9) -> "09"
+new EasyDate().zeroPadNumber(23) -> "23"
+```
+
+### Accessors
+* Here is a list of accessible date object properties:
+
+| Name |     Description     |      Example    |
+|------|---------------------|-----------------|
+| year | Gets the full year  | ED.year -> 2010 |
+| yr   | Gets the short year | ED.yr -> 10     |
+| month| Gets the full month | ED.month -> July|
+| mon  | Gets the short month| ED.mon -> Jul   |
+| numMonth | Gets the month number | Ed.numMonth -> 7 |
+| day  | Gets the full day name | Ed.day -> Tuesday |
+| dy   | Gets the short day name | Ed.dy -> Tues |
+| numDay | Gets the day number| Ed.numDay -> 2 |
+| dom  | Gets the date of the month | Ed.dom -> 6 |
+| hours| Gets the hour of day| Ed.hours -> 7   |
+| mins | Gets the current minute | Ed.mins -> 30|
+| secs | Gets the current second | Ed.secs -> 10| 

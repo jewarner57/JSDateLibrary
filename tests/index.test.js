@@ -42,6 +42,9 @@ test('Format', () => {
   // Empty Edge Case
   expect(EasyDate.format('')).toBe('')
   expect(EasyDate.format('\n\t\r')).toBe('\n\t\r')
+  // Cases with empty fields
+  expect(new as.ED('May 2024').format('%W, %B %d, %h:%I')).toBe('Wednesday, May 1, 0:00')
+  expect(new as.ED('2000').format('%W, %B %d, %Y, %h:%I')).toBe('Friday, December 31, 1999, 19:00')
 })
 
 test('When Edges', () => {
