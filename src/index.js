@@ -233,6 +233,7 @@ class ED {
     // Remove all null unit values
     dateDiffArr = dateDiffArr.filter((elem) => elem != null)
 
+    // Return the units joined by commas with the suffix
     return `${dateDiffArr.join(', ')}${suffix}`
   }
 }

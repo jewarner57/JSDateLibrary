@@ -30,7 +30,7 @@ new EasyDate("March 21, 2021").format("%M-%D-%Y") -> "03-21-2021"
 |  %w  | Abrev. weekday name (Mon)
 |  %a  | Weekday number Sun: (0)   
 |  %D  | Zero padded day of the month (09) 
-|  %d  | Day of the month (09)
+|  %d  | Day of the month (9)
 |  %H  | Zero padded hour 5pm: (05)
 |  %h  | Hour (5)
 |  %I  | Zero padded minute 5:07pm: (07)

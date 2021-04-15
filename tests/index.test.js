@@ -37,6 +37,7 @@ test('zeroPad', () => {
 
 test('Format', () => {
   expect(EasyDate.format('%M-%D-%Y, %H:%I:%S')).toBe('04-21-2021, 04:03:39')
+  expect(EasyDate.format('%W, %B %d, %h:%I')).toBe('Wednesday, April 21, 4:03')
 })
 
 test('When Edges', () => {
