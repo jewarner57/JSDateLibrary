@@ -1,6 +1,6 @@
 {
   "name": "@jewarner57/easydate",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "A compact JS date library that won't make you cry.",
   "main": "/src/index.js",
   "directories": {

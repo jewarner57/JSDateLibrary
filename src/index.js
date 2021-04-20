@@ -236,6 +236,13 @@ class ED {
     // Return the units joined by commas with the suffix
     return `${dateDiffArr.join(', ')}${suffix}`
   }
+
+  [Symbol.toPrimitive](hint) {
+    if (hint === 'number') {
+      return this.date.getTime()
+    }
+    return this.format('%W, %B %d, %Y, %h:%I:%S')
+  }
 }
 
 module.exports = { ED }
