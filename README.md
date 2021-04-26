@@ -1,8 +1,8 @@
 ![npm (scoped)](https://img.shields.io/npm/v/@jewarner57/easydate)
-![NPM](https://img.shields.io/npm/l/@jewarner57/easydate)
 ![GitHub issues](https://img.shields.io/github/issues/jewarner57/JSDateLibrary)
 ![GitHub repo size](https://img.shields.io/github/repo-size/jewarner57/JSDateLibrary)
 ![Coveralls](https://img.shields.io/coveralls/github/jewarner57/JSDateLibrary)
+![Travis (.com)](https://img.shields.io/travis/com/jewarner57/JSDateLibrary)
 
 ## Easy Date
 ### Has the default JavaScript Date object left you frustrated and sad? Then Easy Date is here to bury your sadness under another level of abstraction.
