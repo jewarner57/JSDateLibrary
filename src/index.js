@@ -182,7 +182,10 @@ class ED {
 * @returns {String} the unit amount string or an empty string if unit is less than 1
 */
   getUnitAmountFromDateDifference(name, divisor, modulus, dateDifference) {
-    const unit = Math.floor(Math.abs(dateDifference / divisor)) % modulus
+    // const unit = Math.floor(Math.abs(dateDifference / divisor)) % modulus
+    let unit = parseFloat(Math.abs(dateDifference / divisor).toFixed(4))
+    unit = Math.floor(unit) % modulus
+
     if (unit > 0) {
       return `${Math.round(Math.abs(unit))} ${this.getUnitForm(name, unit)}`
     }
