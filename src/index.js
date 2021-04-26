@@ -187,7 +187,7 @@ class ED {
     unit = Math.floor(unit) % modulus
 
     if (unit > 0) {
-      return `${Math.round(Math.abs(unit))} ${this.getUnitForm(name, unit)}`
+      return `${(Math.abs(unit))} ${this.getUnitForm(name, unit)}`
     }
     return null
   }
