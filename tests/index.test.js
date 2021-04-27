@@ -74,7 +74,7 @@ test('When Years', () => {
 test('When Months', () => {
   // Check times with a difference of months only
   expect(EasyDate.when(new Date('June 21, 2021, 4:03:39'))).toBe('2 months, 1 day from now')
-  expect(EasyDate.when(new Date('January 21, 2021, 4:03:39'))).toBe('2 months, 29 days, 23 hours ago')
+  expect(EasyDate.when(new Date('Jan 21, 2021, 3:03:39'))).toBe('3 months ago')
 })
 
 test('When Days', () => {
