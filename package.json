@@ -2,7 +2,12 @@
   "name": "@jewarner57/easydate",
   "version": "1.1.2",
   "description": "A compact JS date library that won't make you cry.",
-  "main": "/src/index.js",
+  "main": "umd/easydate.js",
+  "module": "esm/index.js",
+  "files": [
+    "esm/*",
+    "umd/*"
+  ],
   "directories": {
     "test": "tests"
   },
@@ -10,7 +15,8 @@
     "start": "node ./src/index.js",
     "test-watch": "jest --watchAll",
     "test": "jest",
-    "coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls"
+    "coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls",
+    "prepare": "rollup --config"
   },
   "eslintConfig": {
     "extends": "airbnb-base",
@@ -36,6 +42,8 @@
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
     "jest": "^26.6.3",
-    "jsdoc": "^3.6.6"
+    "jsdoc": "^3.6.6",
+    "rollup": "^2.45.2",
+    "rollup-plugin-terser": "^7.0.2"
   }
 }

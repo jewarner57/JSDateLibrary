@@ -1,6 +1,6 @@
 class ED {
   constructor(...args) {
-    this.date = new Date(...args)
+    this.date = new Date(...args);
     this.formatingChars = {
       // Full year
       '%Y': this.year,
@@ -36,7 +36,7 @@ class ED {
       '%S': this.zeroPadNumber(this.secs),
       // seconds
       '%s': this.secs,
-    }
+    };
   }
 
   /**
@@ -150,11 +150,11 @@ class ED {
 * @returns {String} a mask where all formatting chars have been replaced
 */
   format(mask) {
-    let convertedMask = mask
+    let convertedMask = mask;
 
     // Split on each special character and then join with its substitute
     Object.keys(this.formatingChars).forEach((key) => {
-      convertedMask = convertedMask.split(key).join(this.formatingChars[key])
+      convertedMask = convertedMask.split(key).join(this.formatingChars[key]);
     });
 
     return convertedMask
@@ -183,8 +183,8 @@ class ED {
 */
   getUnitAmountFromDateDifference(name, divisor, modulus, dateDifference) {
     // const unit = Math.floor(Math.abs(dateDifference / divisor)) % modulus
-    let unit = parseFloat(Math.abs(dateDifference / divisor).toFixed(4))
-    unit = Math.floor(unit) % modulus
+    let unit = parseFloat(Math.abs(dateDifference / divisor).toFixed(4));
+    unit = Math.floor(unit) % modulus;
 
     if (unit > 0) {
       return `${(Math.abs(unit))} ${this.getUnitForm(name, unit)}`
@@ -198,43 +198,43 @@ class ED {
 * @returns {String} a human readable difference of time between the two dates
 */
   when(date) {
-    const now = new Date(this.date)
+    const now = new Date(this.date);
     // Get the difference between the two dates in minutes
-    const dateDifference = (date - now) / 60000
+    const dateDifference = (date - now) / 60000;
     // Decide whether it's in the past or future
-    let suffix = dateDifference > 0 ? ' from now' : ' ago'
-    let dateDiffArr = []
+    let suffix = dateDifference > 0 ? ' from now' : ' ago';
+    let dateDiffArr = [];
 
     // Since date difference is in minutes
     // We can check if the total time difference is < 1 minute
     if (dateDifference > 0 && dateDifference < 1) {
-      dateDiffArr.unshift('Less than one minute')
+      dateDiffArr.unshift('Less than one minute');
     }
     if ((dateDifference < 0 && dateDifference > -1)) {
-      dateDiffArr.unshift('Less than a minute')
+      dateDiffArr.unshift('Less than a minute');
     }
     if (dateDifference === 0) {
-      dateDiffArr.unshift('Now')
-      suffix = ''
+      dateDiffArr.unshift('Now');
+      suffix = '';
     }
 
     // Get minutes
-    dateDiffArr.unshift(this.getUnitAmountFromDateDifference('minute', 1, 60, dateDifference))
+    dateDiffArr.unshift(this.getUnitAmountFromDateDifference('minute', 1, 60, dateDifference));
 
     // Get hours
-    dateDiffArr.unshift(this.getUnitAmountFromDateDifference('hour', 60, 24, dateDifference))
+    dateDiffArr.unshift(this.getUnitAmountFromDateDifference('hour', 60, 24, dateDifference));
 
     // Get days
-    dateDiffArr.unshift(this.getUnitAmountFromDateDifference('day', 1440, 30, dateDifference))
+    dateDiffArr.unshift(this.getUnitAmountFromDateDifference('day', 1440, 30, dateDifference));
 
     // Get months
-    dateDiffArr.unshift(this.getUnitAmountFromDateDifference('month', 43200, 12, dateDifference))
+    dateDiffArr.unshift(this.getUnitAmountFromDateDifference('month', 43200, 12, dateDifference));
 
     // Get years
-    dateDiffArr.unshift(this.getUnitAmountFromDateDifference('year', 525600, 525600, dateDifference))
+    dateDiffArr.unshift(this.getUnitAmountFromDateDifference('year', 525600, 525600, dateDifference));
 
     // Remove all null unit values
-    dateDiffArr = dateDiffArr.filter((elem) => elem != null)
+    dateDiffArr = dateDiffArr.filter((elem) => elem != null);
 
     // Return the units joined by commas with the suffix
     return `${dateDiffArr.join(', ')}${suffix}`
@@ -248,4 +248,4 @@ class ED {
   }
 }
 
-export default ED
+export default ED;

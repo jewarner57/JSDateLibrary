@@ -1,4 +1,4 @@
-const as = require('../src/index.js');
+const as = require('../umd/easydate')
 
 // Test Constants
 const EasyDate = new as.ED('April 21, 2021, 4:03:39')
