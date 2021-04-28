@@ -1,7 +1,7 @@
-const as = require('../umd/easydate')
+const ED = require('../umd/easydate')
 
 // Test Constants
-const EasyDate = new as.ED('April 21, 2021, 4:03:39')
+const EasyDate = new ED('April 21, 2021, 4:03:39')
 
 // Test getters work correctly
 test('Year', () => {
@@ -43,13 +43,13 @@ test('Format', () => {
   expect(EasyDate.format('')).toBe('')
   expect(EasyDate.format('\n\t\r')).toBe('\n\t\r')
   // Cases with empty fields
-  expect(new as.ED('May 2024').format('%W, %B %d, %h:%I')).toBe('Wednesday, May 1, 0:00')
-  expect(new as.ED('Dec 31, 1999, 19:00').format('%W, %B %d, %Y, %h:%I')).toBe('Friday, December 31, 1999, 19:00')
+  expect(new ED('May 2024').format('%W, %B %d, %h:%I')).toBe('Wednesday, May 1, 0:00')
+  expect(new ED('Dec 31, 1999, 19:00').format('%W, %B %d, %Y, %h:%I')).toBe('Friday, December 31, 1999, 19:00')
 })
 
 test('When Edges', () => {
   // Check close dates where a year change happened between them
-  expect(new as.ED('Dec 23, 2020').when(new Date('Jan 1, 2021'))).toBe('9 days from now')
+  expect(new ED('Dec 23, 2020').when(new Date('Jan 1, 2021'))).toBe('9 days from now')
 
   // Check with times within less than 1 minute of each other
   expect(EasyDate.when(new Date('April 21, 2021, 4:03:38 AM'))).toBe('Less than a minute ago')
