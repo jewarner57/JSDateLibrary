@@ -6,7 +6,7 @@ export default [
     output: {
       file: 'umd/easydate.js',
       format: 'umd',
-      name: 'easyDate'
+      name: 'easydate'
     }
   },
   {
